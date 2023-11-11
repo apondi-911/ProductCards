@@ -1,0 +1,23 @@
+.btn-primary:hover {
+        background-color: green;
+    }
+/* Add this to your CSS file or in a <style> tag in your HTML template */
+form {
+    width: 50%; /* Adjust the width as needed */
+    margin: auto; /* Center the form horizontally */
+    padding: 20px; /* Add some padding for better visual appearance */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 10px; /* Add border radius */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle box shadow */
+}
+
+/* Style the form elements if needed */
+form input,
+form select,
+form textarea,
+form button {
+    margin-bottom: 10px;
+    width: 100%; /* Make form elements fill the width of the form */
+    padding: 10px; /* Add padding for better spacing */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}

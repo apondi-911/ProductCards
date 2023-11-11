@@ -1,0 +1,73 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Title</title>
+{% endblock %}
+
+{% block content %}
+
+    <nav class="navbar navbar-dark bg-dark d-flex justify-space-between align-items-center">
+         <div class="container ">
+            <h1><a class="navbar-brand" style="color:#417690;">Shoe Store</a></h1>
+             <div class="menus" style=" float: right">
+                    <a href="{% url 'home-url' %}">
+                        <i class="fa fa-home fa-2x" aria-hidden="true"></i> <span class="side-menu-text"> Home </span>
+                    </a>
+                     <a href="{% url 'cart-url' %}">
+                        <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i> Cart
+                        <span class="side-menu-text" style="color: red">
+                            ({{ request.session.cart|length|default:0 }})
+                        </span>
+                      </a>
+             </div>
+         </div>
+    </nav>
+  <div class="container align-items-center justify-content-center d-flex">
+      <div class="row ">
+           {% for shoes in shoes %}
+                <!-- Column for card-->
+                <div class="col-lg-4 mb-2">
+                    <div class="card " style="width:20rem; box-shadow: #1b1b1b; box-sizing: border-box;">
+                        <img class="card-img-top" src="{{ shoes.image.url }}" alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ shoes.name }}</h4>
+                                <p class="card-text">{{ shoes.description }}</p>
+                                <p class="card-text" style="color: purple">Kshs. {{ shoes.amount }}</p>
+                                    <a href="#" class="btn btn-primary m-4 add-to-cart-btn" data-shoe-id="{{ shoes.id }}">
+                                        <span><i class="fa fa-shopping-cart fa-1x" aria-hidden="true"></i> Add to Cart</span>
+                                    </a>
+                                <br>
+                                <br>
+                                <a href="{% url 'payment-url' %}" class="btn btn-primary m-4" > Buy Now</a>
+                            </div>
+                    </div>
+                </div>
+            {% endfor %}
+      </div>
+  </div>
+
+
+    <!-- Update your template -->
+<!-- ... -->
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".add-to-cart-btn").on("click", function () {
+            var shoeId = $(this).data("shoe-id");
+            $.ajax({
+                url: "/add_to_cart/" + shoeId + "/",
+                type: "GET",
+                success: function (data) {
+                    alert("Item added to cart!");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}

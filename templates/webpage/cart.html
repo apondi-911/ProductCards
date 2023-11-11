@@ -1,0 +1,20 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Shopping Cart</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Your Shopping Cart</h1>
+
+    {% if shoes_in_cart %}
+        <ul>
+            {% for item in shoes_in_cart %}
+                <li>{{ item.quantity }} x {{ item.shoe.name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+{% endblock %}
